@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Sign Up</title>
-    <link rel="stylesheet" href="AdminSigup.css">
-</head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/AdminSignup.css') }}">
 <body>
     <div class="container">
         <div class="form-container">
@@ -35,7 +34,7 @@
             </form>
         </div>
         <div class="illustration">
-            <img src="signupimage.png" alt="Illustration">
+            <img src="{{ url_for('static', filename='signupimage.png') }}" alt="Illustration">
         </div>
     </div>
     <script>
