@@ -12,7 +12,6 @@
             <h1>UpSkill Vision</h1>
             <p>Your Learning Path</p>
             <img src="{{ url_for('static', filename='loginimage.jpeg') }}" alt="Educational Illustration">
-
         </div>
         <div class="right-section">
             <div class="tabs">
@@ -21,16 +20,32 @@
             </div>
             <div class="login-form">
                 <h2>Welcome,</h2>
-                <label for="email">Email Address / Mobile number *</label>
-                <input type="email" id="email" placeholder="example@gmail.com">
-                <label for="password">Password *</label>
-                <input type="password" id="password" placeholder="Password">
-                <a href="#">Forgot password?</a>
-                <button>Login Now</button> 
-                
-                
+
+                <!-- Display flash messages if any -->
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <ul class="flash-messages">
+                            {% for category, message in messages %}
+                                <li class="alert alert-{{ category }}">{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+
+                <!-- Login Form -->
+                <form method="POST" action="{{ url_for('login') }}">
+                    <label for="email">Email Address / Mobile number *</label>
+                    <input type="email" id="email" name="email" placeholder="example@gmail.com" required>
+
+                    <label for="password">Password *</label>
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+
+                    <a href="#">Forgot password?</a>
+                    <button type="submit">Login Now</button>
+                </form>
+
                 <br>
-                <button class="create-account">Create New account</button>
+                <a href="{{ url_for('signup_page') }}" class="signup-button">Sign Up</a>
             </div>
         </div>
     </div>

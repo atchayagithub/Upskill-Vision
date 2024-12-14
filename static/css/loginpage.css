@@ -99,3 +99,28 @@ body {
 .login-form .create-account {
     background-color: #8e24aa;
 }
+
+.flash-messages {
+    margin-bottom: 20px;
+    padding: 10px;
+    list-style-type: none;
+}
+
+.flash-messages .alert {
+    padding: 15px;
+    margin: 5px 0;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.flash-messages .alert.alert-success {
+    background-color: #4CAF50;
+}
+
+.flash-messages .alert.alert-error {
+    background-color: #f44336;
+}
+
+.flash-messages .alert.alert-info {
+    background-color: #2196F3;
+}

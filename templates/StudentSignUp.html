@@ -3,25 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New User Registration</title>
+    <title>Signup - UpSkill Vision</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/UserSignup.css') }}">
 </head>
 <body>
     <div class="registration-form">
         <h2>New User Registration</h2>
-        <form id="registration-form" onsubmit="return validatePassword()">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flash-messages">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
+        <form method="POST" action="{{ url_for('signup_page') }}" onsubmit="return validatePassword()">
             <div class="form-column">
                 <label for="first-name">First Name</label>
-                <input type="text" id="first-name" name="first-name" placeholder="First Name" required>
+                <input type="text" id="first-name" name="first_name" placeholder="First Name" required>
                 
                 <label for="last-name">Last Name</label>
-                <input type="text" id="last-name" name="last-name" placeholder="Last Name" required>
+                <input type="text" id="last-name" name="last_name" placeholder="Last Name" required>
                 
                 <label for="phone-number">Phone Number</label>
-                <input type="text" id="phone-number" name="phone-number" placeholder="Phone Number" required>
+                <input type="text" id="phone-number" name="phone_number" placeholder="Phone Number" required>
                 
                 <label for="dob">Date of Birth</label>
-                <input type="date" id="dob" name="dob" required>
+                <input type="date" id="dob" name="date_of_birth" required>
                 
                 <label for="country">Country</label>
                 <select id="country" name="country" required>
@@ -29,28 +38,7 @@
                     <option value="India">India</option>
                     <option value="United States">United States</option>
                     <option value="United Kingdom">United Kingdom</option>
-                    <option value="Canada">Canada</option>
-                    <option value="Australia">Australia</option>
-                    <option value="Germany">Germany</option>
-                    <option value="France">France</option>
-                    <option value="Japan">Japan</option>
-                    <option value="China">China</option>
-                    <option value="Brazil">Brazil</option>
-                    <option value="Russia">Russia</option>
-                    <option value="South Korea">South Korea</option>
-                    <option value="Mexico">Mexico</option>
-                    <option value="Spain">Spain</option>
-                    <option value="Italy">Italy</option>
-                    <option value="Turkey">Turkey</option>
-                    <option value="South Africa">South Africa</option>
-                    <option value="Argentina">Argentina</option>
-                    <option value="Sweden">Sweden</option>
-                    <option value="Netherlands">Netherlands</option>
-                    <option value="Switzerland">Switzerland</option>
-                    <option value="Poland">Poland</option>
-                    <option value="Saudi Arabia">Saudi Arabia</option>
-                    <option value="Indonesia">Indonesia</option>
-                    <option value="Zimbabwe">Zimbabwe</option>
+                    <!-- Add more countries as needed -->
                 </select>
             </div>
             <div class="form-column">
@@ -61,16 +49,16 @@
                 <input type="text" id="education" name="education" placeholder="Education" required>
                 
                 <label for="college">College / Organization</label>
-                <input type="text" id="college" name="college" placeholder="College / Organization" required>
+                <input type="text" id="college" name="organization" placeholder="College / Organization" required>
                 
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="Password" required>
                 
                 <label for="confirm-password">Confirm Password</label>
-                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password" required>
+                <input type="password" id="confirm-password" placeholder="Confirm Password" required>
                 
                 <label for="terms">
-                    <input type="checkbox" id="terms" name="terms" required>
+                    <input type="checkbox" id="terms" required>
                     I agree to the <a href="#">Terms and Conditions</a>
                 </label>
                 
@@ -79,10 +67,10 @@
                 </p>
                 
                 <button type="submit">Create an Account</button>
+                <p>Already have an account? <a href="{{ url_for('login_page') }}">Log In</a></p>
             </div>
         </form>
     </div>
-
     <script>
         function validatePassword() {
             var password = document.getElementById("password").value;
